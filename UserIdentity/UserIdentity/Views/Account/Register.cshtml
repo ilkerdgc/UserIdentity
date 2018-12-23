@@ -1,0 +1,31 @@
+﻿@model UserIdentity.Models.Register
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+<hr />
+
+@Html.ValidationSummary() <!-- Bu metod boş geçilmesi veya belirlediğimi kurallara uyulmaması durumunda hata mesajlarını yazdıracak. -->
+
+@using (Html.BeginForm()) // BeginForm parametrelerini belirtmezsek otomatik olarak httppost action metoduna gider
+{
+    @Html.AntiForgeryToken() <!-- HttpPost aşamasında dışarıdan gelen saldırıları engellemek için kullanılan metodtur. Html.beginform formunun içinde Html.AntiForgeryToken() metodunu kullanıyor iseniz, buna bağlı olan actionresult'ın üstüne [ValidateAntiForgeryToken] sınıfınıda koymalısınız. -->
+
+    <div class="form-group">
+        <label>Username</label>
+        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ekle</button>
+}
